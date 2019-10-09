@@ -1,6 +1,6 @@
 .DS_Store 
 */.DS_Store 
-Created by https://www.gitignore.io/api/java,macos,maven,java-web,code-java,intellij+all
+# Created by https://www.gitignore.io/api/java,macos,maven,java-web,code-java,intellij+all
 # Edit at https://www.gitignore.io/?templates=java,macos,maven,java-web,code-java,intellij+all
 
 ### Code-Java ###

@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.ywcjxf.simple.redismq.config.SimpleRedisMQAutoConfiguration,\
-org.ywcjxf.simple.redismq.config.ScheduledConfig
