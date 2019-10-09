@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.BookBooktagMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.BookBooktag">
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="booktag_id" jdbcType="INTEGER" property="booktagId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.BookBooktag">
+    insert into t_book_booktag (book_id, booktag_id)
+    values (#{bookId,jdbcType=INTEGER}, #{booktagId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.BookBooktag">
+    insert into t_book_booktag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="booktagId != null">
+        booktag_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="booktagId != null">
+        #{booktagId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

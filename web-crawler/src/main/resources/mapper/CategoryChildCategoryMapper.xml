@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CategoryChildCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.CategoryChildCategory">
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="child_category_id" jdbcType="INTEGER" property="childCategoryId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.CategoryChildCategory">
+    insert into t_category_child_category (category_id, child_category_id)
+    values (#{categoryId,jdbcType=INTEGER}, #{childCategoryId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.CategoryChildCategory">
+    insert into t_category_child_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="childCategoryId != null">
+        child_category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="childCategoryId != null">
+        #{childCategoryId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
