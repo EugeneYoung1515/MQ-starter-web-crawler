@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.PublishInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.PublishInfo">
+    <id column="publish_id" jdbcType="INTEGER" property="publishId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_title" jdbcType="VARCHAR" property="bookTitle" />
+    <result column="series_name" jdbcType="VARCHAR" property="seriesName" />
+    <result column="book_date" jdbcType="DATE" property="bookDate" />
+    <result column="book_number" jdbcType="VARCHAR" property="bookNumber" />
+    <result column="price" jdbcType="NUMERIC" property="price" />
+    <result column="page_num" jdbcType="INTEGER" property="pageNum" />
+    <result column="print" jdbcType="VARCHAR" property="print" />
+    <result column="book_size" jdbcType="VARCHAR" property="bookSize" />
+    <result column="book_status" jdbcType="VARCHAR" property="bookStatus" />
+    <result column="original_title" jdbcType="VARCHAR" property="originalTitle" />
+    <result column="original_book_number" jdbcType="VARCHAR" property="originalBookNumber" />
+    <result column="amazon_link" jdbcType="VARCHAR" property="amazonLink" />
+    <result column="question_contact" jdbcType="VARCHAR" property="questionContact" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    publish_id, book_id, book_title, series_name, book_date, book_number, price, page_num, 
+    print, book_size, book_status, original_title, original_book_number, amazon_link, 
+    question_contact
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_publish_info
+    where publish_id = #{publishId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_publish_info
+    where publish_id = #{publishId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.PublishInfo">
+    insert into t_publish_info (publish_id, book_id, book_title, 
+      series_name, book_date, book_number, 
+      price, page_num, print, 
+      book_size, book_status, original_title, 
+      original_book_number, amazon_link, question_contact
+      )
+    values (#{publishId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{bookTitle,jdbcType=VARCHAR}, 
+      #{seriesName,jdbcType=VARCHAR}, #{bookDate,jdbcType=DATE}, #{bookNumber,jdbcType=VARCHAR}, 
+      #{price,jdbcType=NUMERIC}, #{pageNum,jdbcType=INTEGER}, #{print,jdbcType=VARCHAR}, 
+      #{bookSize,jdbcType=VARCHAR}, #{bookStatus,jdbcType=VARCHAR}, #{originalTitle,jdbcType=VARCHAR}, 
+      #{originalBookNumber,jdbcType=VARCHAR}, #{amazonLink,jdbcType=VARCHAR}, #{questionContact,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.PublishInfo">
+    insert into t_publish_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="publishId != null">
+        publish_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="bookTitle != null">
+        book_title,
+      </if>
+      <if test="seriesName != null">
+        series_name,
+      </if>
+      <if test="bookDate != null">
+        book_date,
+      </if>
+      <if test="bookNumber != null">
+        book_number,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="pageNum != null">
+        page_num,
+      </if>
+      <if test="print != null">
+        print,
+      </if>
+      <if test="bookSize != null">
+        book_size,
+      </if>
+      <if test="bookStatus != null">
+        book_status,
+      </if>
+      <if test="originalTitle != null">
+        original_title,
+      </if>
+      <if test="originalBookNumber != null">
+        original_book_number,
+      </if>
+      <if test="amazonLink != null">
+        amazon_link,
+      </if>
+      <if test="questionContact != null">
+        question_contact,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="publishId != null">
+        #{publishId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTitle != null">
+        #{bookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null">
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDate != null">
+        #{bookDate,jdbcType=DATE},
+      </if>
+      <if test="bookNumber != null">
+        #{bookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="pageNum != null">
+        #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="print != null">
+        #{print,jdbcType=VARCHAR},
+      </if>
+      <if test="bookSize != null">
+        #{bookSize,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStatus != null">
+        #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTitle != null">
+        #{originalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalBookNumber != null">
+        #{originalBookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amazonLink != null">
+        #{amazonLink,jdbcType=VARCHAR},
+      </if>
+      <if test="questionContact != null">
+        #{questionContact,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.PublishInfo">
+    update t_publish_info
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTitle != null">
+        book_title = #{bookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null">
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookDate != null">
+        book_date = #{bookDate,jdbcType=DATE},
+      </if>
+      <if test="bookNumber != null">
+        book_number = #{bookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="pageNum != null">
+        page_num = #{pageNum,jdbcType=INTEGER},
+      </if>
+      <if test="print != null">
+        print = #{print,jdbcType=VARCHAR},
+      </if>
+      <if test="bookSize != null">
+        book_size = #{bookSize,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStatus != null">
+        book_status = #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="originalTitle != null">
+        original_title = #{originalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalBookNumber != null">
+        original_book_number = #{originalBookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="amazonLink != null">
+        amazon_link = #{amazonLink,jdbcType=VARCHAR},
+      </if>
+      <if test="questionContact != null">
+        question_contact = #{questionContact,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where publish_id = #{publishId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.PublishInfo">
+    update t_publish_info
+    set book_id = #{bookId,jdbcType=INTEGER},
+      book_title = #{bookTitle,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      book_date = #{bookDate,jdbcType=DATE},
+      book_number = #{bookNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=NUMERIC},
+      page_num = #{pageNum,jdbcType=INTEGER},
+      print = #{print,jdbcType=VARCHAR},
+      book_size = #{bookSize,jdbcType=VARCHAR},
+      book_status = #{bookStatus,jdbcType=VARCHAR},
+      original_title = #{originalTitle,jdbcType=VARCHAR},
+      original_book_number = #{originalBookNumber,jdbcType=VARCHAR},
+      amazon_link = #{amazonLink,jdbcType=VARCHAR},
+      question_contact = #{questionContact,jdbcType=VARCHAR}
+    where publish_id = #{publishId,jdbcType=INTEGER}
+  </update>
+</mapper>

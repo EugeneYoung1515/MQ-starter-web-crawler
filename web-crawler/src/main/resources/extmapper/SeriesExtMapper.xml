@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.SeriesMapper">
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_series where series_name = #{seriesName}
+  </select>
+  <insert id="insertAndReturnId" parameterType="com.example.demo.model.Series" useGeneratedKeys="true" keyProperty="seriesId" keyColumn="series_id">
+    insert into t_series
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="seriesId != null">
+        series_id,
+      </if>
+      <if test="seriesName != null">
+        series_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="seriesId != null">
+        #{seriesId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesName != null">
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectIn" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_series WHERE series_namee in
+    <foreach item="item" index="index" collection="list"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+</mapper>

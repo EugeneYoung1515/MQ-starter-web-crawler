@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TranslatorAuthorMapper">
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_translator_author where author_name = #{authorName}
+  </select>
+  <insert id="insertAndReturnId" parameterType="com.example.demo.model.TranslatorAuthor" useGeneratedKeys="true" keyProperty="translatorAuthorId" keyColumn="translator_author_id">
+    insert into t_translator_author
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="translatorAuthorId != null">
+        translator_author_id,
+      </if>
+      <if test="authorName != null">
+        author_name,
+      </if>
+      <if test="translatorAuthorIntro != null">
+        translator_author_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="translatorAuthorId != null">
+        #{translatorAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorName != null">
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="translatorAuthorIntro != null">
+        #{translatorAuthorIntro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectIn" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_translator_author WHERE author_name in
+    <foreach item="item" index="index" collection="list"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+</mapper>

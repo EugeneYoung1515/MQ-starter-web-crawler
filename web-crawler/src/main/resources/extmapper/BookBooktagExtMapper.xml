@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.BookBooktagMapper">
+  <select id="selectCountByBookId" resultType="java.lang.Integer">
+    select count(*) from t_book_booktag where book_id = #{bookId}
+  </select>
+  <insert id="insertBatch" >
+    insert into t_book_booktag (book_id, booktag_id)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.bookId},#{item.booktagId})
+    </foreach>
+  </insert>
+</mapper>

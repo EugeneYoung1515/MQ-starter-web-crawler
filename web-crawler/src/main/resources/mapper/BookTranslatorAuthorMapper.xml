@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.BookTranslatorAuthorMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.BookTranslatorAuthor">
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="translator_author_id" jdbcType="INTEGER" property="translatorAuthorId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.BookTranslatorAuthor">
+    insert into t_book_translator_author (book_id, translator_author_id)
+    values (#{bookId,jdbcType=INTEGER}, #{translatorAuthorId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.BookTranslatorAuthor">
+    insert into t_book_translator_author
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="translatorAuthorId != null">
+        translator_author_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="translatorAuthorId != null">
+        #{translatorAuthorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

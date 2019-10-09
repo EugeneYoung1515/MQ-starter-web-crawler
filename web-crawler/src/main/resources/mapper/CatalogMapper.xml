@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CatalogMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Catalog">
+    <id column="chapter_id" jdbcType="INTEGER" property="chapterId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="chapter_intro" jdbcType="VARCHAR" property="chapterIntro" />
+    <result column="chapter_link" jdbcType="VARCHAR" property="chapterLink" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    chapter_id, book_id, chapter_intro, chapter_link
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_catalog
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_catalog
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Catalog">
+    insert into t_catalog (chapter_id, book_id, chapter_intro, 
+      chapter_link)
+    values (#{chapterId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{chapterIntro,jdbcType=VARCHAR}, 
+      #{chapterLink,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Catalog">
+    insert into t_catalog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        chapter_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="chapterIntro != null">
+        chapter_intro,
+      </if>
+      <if test="chapterLink != null">
+        chapter_link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chapterId != null">
+        #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterIntro != null">
+        #{chapterIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterLink != null">
+        #{chapterLink,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Catalog">
+    update t_catalog
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterIntro != null">
+        chapter_intro = #{chapterIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterLink != null">
+        chapter_link = #{chapterLink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Catalog">
+    update t_catalog
+    set book_id = #{bookId,jdbcType=INTEGER},
+      chapter_intro = #{chapterIntro,jdbcType=VARCHAR},
+      chapter_link = #{chapterLink,jdbcType=VARCHAR}
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+</mapper>
