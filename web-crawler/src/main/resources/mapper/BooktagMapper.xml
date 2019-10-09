@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.BooktagMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Booktag">
+    <id column="booktag_id" jdbcType="INTEGER" property="booktagId" />
+    <result column="booktag_name" jdbcType="VARCHAR" property="booktagName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    booktag_id, booktag_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_booktag
+    where booktag_id = #{booktagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_booktag
+    where booktag_id = #{booktagId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Booktag">
+    insert into t_booktag (booktag_id, booktag_name)
+    values (#{booktagId,jdbcType=INTEGER}, #{booktagName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Booktag">
+    insert into t_booktag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="booktagId != null">
+        booktag_id,
+      </if>
+      <if test="booktagName != null">
+        booktag_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="booktagId != null">
+        #{booktagId,jdbcType=INTEGER},
+      </if>
+      <if test="booktagName != null">
+        #{booktagName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Booktag">
+    update t_booktag
+    <set>
+      <if test="booktagName != null">
+        booktag_name = #{booktagName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where booktag_id = #{booktagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Booktag">
+    update t_booktag
+    set booktag_name = #{booktagName,jdbcType=VARCHAR}
+    where booktag_id = #{booktagId,jdbcType=INTEGER}
+  </update>
+</mapper>

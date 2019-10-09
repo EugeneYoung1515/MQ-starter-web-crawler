@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.AlsoLikeMapper">
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select also_like_id from t_also_like order by also_like_id desc limit 1
+  </select>
+  <insert id="insertAndReturnId" parameterType="com.example.demo.model.AlsoLike" useGeneratedKeys="true" keyProperty="alsoLikeId" keyColumn="also_like_id">
+    insert into t_also_like
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="alsoLikeId != null">
+        also_like_id,
+      </if>
+      <if test="alsoLikeName != null">
+        also_like_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="alsoLikeId != null">
+        #{alsoLikeId,jdbcType=INTEGER},
+      </if>
+      <if test="alsoLikeName != null">
+        #{alsoLikeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
